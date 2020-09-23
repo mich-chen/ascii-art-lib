@@ -54,4 +54,15 @@ class Rectangle():
 
         self.fill_char = new_char
 
+    def translate(self, axis, num):
+        """Move rectangle left, right, up, or down."""
+
+        if axis == 'x':
+            self.start_x += num
+            self.end_x += num
+        if axis == 'y':
+            self.start_y += num
+            self.end_y += num
+    
+
 

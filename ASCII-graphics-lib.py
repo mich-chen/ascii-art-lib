@@ -1,3 +1,11 @@
+class Node():
+    """A node."""
+
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
 class Linkedlist():
     """A linked list."""
 
@@ -6,22 +14,37 @@ class Linkedlist():
         self.head = None
         self.tail = None
 
+    def append(self, shape):
+        """Add shape to end of linked list."""
+
+        new_node = Node(shape)
+
+        if self.head is None:
+            self.head = new_node
+
+        if self.tail is not None:
+            self.tail.next = new_node
+
+        self.tail = new_node
+
 
 class Canvas():
     """A canvas."""
 
     def __init__(self):
         """Create a 10 x 10 character canvas."""
+
         self.width = 10
         self.height = 10
         self.shapes = Linkedlist()
 
     def render_canvas(self):
         """Print canvas and any shapes."""
-        print(self)
+
+        print(self.shapes)
 
     def add_shape(self, shape):
-        """Add shape to a canvas."""
+        """Add shape to a canvas, most recently added rectangles should appear on top."""
 
         self.shapes.append(shape)
 
@@ -30,10 +53,11 @@ class Canvas():
 
         self.shapes = None
 
+
 class Rectangle():
     """A rectangle."""
 
-    def __init__(self, start_x, start_y, end_x, end_y, fill_char):
+    def __init__(self, start_x=None, start_y=None, end_x=None, end_y=None, fill_char=None):
         """Create instance of rectangle's dimensions and character.
 
         start_x is the X coordinate of the upper-left-hand corner of the rectangle,

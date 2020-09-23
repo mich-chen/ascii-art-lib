@@ -48,6 +48,8 @@ class Rectangle():
         self.end_x = end_x
         self.end_y = end_y
         self.fill_char = fill_char
+        self.area = (self.end_x - self.start_x) * (self.start_y - self.end_y)
+
 
     def change_fill_char(self, new_char):
         """Change rectangle's fill character."""
@@ -63,6 +65,6 @@ class Rectangle():
         if axis == 'y':
             self.start_y += num
             self.end_y += num
-    
+
 
 

@@ -4,9 +4,10 @@ class Node():
     def __init__(self, data):
         self.data = data
         self.next = None
+        self.previous = None
 
 
-class Linkedlist():
+class DLinkedlist():
     """A linked list."""
 
     def __init__(self):
@@ -24,6 +25,8 @@ class Linkedlist():
 
         if self.tail is not None:
             self.tail.next = new_node
+            new_node.previous = self.tail
+            self.tail = new_node
 
         self.tail = new_node
 
@@ -36,11 +39,7 @@ class Canvas():
 
         self.width = 10
         self.height = 10
-        self.shapes = Linkedlist()
-
-    @property
-    def shape_coordinates(self):
-        return self._shape_coordinates
+        self.shapes = DLinkedlist()
 
     def render_canvas(self):
         """Print canvas and any shapes."""
@@ -48,8 +47,7 @@ class Canvas():
         row = [0] * self.width
         top_shape = self.shapes.tail.data
 
-        shape_len = set(list(range(top_shape.start_x, top_shape.end_x + 1)))
-        shape_wid = set(list(range(top_shape.start_y, top_shape.end_y + 1)))
+        top_shape.shape
 
         for i in range(0, self.height):
             current_row = list(row)
@@ -95,6 +93,20 @@ class Rectangle():
         self.end_y = end_y
         self.fill_char = fill_char
         # self.area = (self.end_x - self.start_x) * (self.start_y - self.end_y)
+
+    @property
+    def shape_len(self):
+
+        self._shape_len = set(list(range(self.start_x, self.end_x + 1)))
+
+        return self._shape_len
+
+    @property
+    def shape_wid(self):
+
+        self._shape_wid = set(list(range(self.start_y, self.end_y + 1)))
+
+        return self._shape_wid
 
     def change_fill_char(self, new_char):
         """Change rectangle's fill character."""

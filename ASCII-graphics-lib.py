@@ -185,6 +185,7 @@ def clear_canvas(canvas):
 
     print('\nRemove all shapes from canvas.')
     canvas.clear_canvas()
+    canvas.render_canvas()
 
 
 # *************************

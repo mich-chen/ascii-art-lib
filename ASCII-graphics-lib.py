@@ -80,12 +80,6 @@ class Canvas():
         for row in canvas:
             print(row)
 
-    def render_plain_canvas(self):
-        """Print plain canvas with no shapes."""
-        row = [0] * self.width
-        for i in range(0, self.height):
-            print(row)
-
     def add_shape(self, shape):
         """Add shape to a canvas, most recently added rectangles should appear on top."""
 
@@ -153,14 +147,58 @@ class Rectangle():
             self.start_y += num
             self.end_y += num
 
+
+# ******** Functions to call to test when running file. *******
+
+def plain_canvas(canvas):
+    """Render plain canvas."""
+
+    print('\nNew plain canvas')
+    canvas.render_canvas()
+
+def add_shapes_to_canvas(canvas, *shapes):
+    """Adding rectangles to canvas."""
+
+    print('\nAdding shapes to canvas')
+    for shape in shapes:
+        canvas.add_shape(shape)
+    canvas.render_canvas()
+
+def move_shape(canvas, shape):
+    """Move a rectangle."""
+
+    print('\nMove * rectangle to the right by 3')
+    shape.translate('x',3)
+    canvas.render_canvas()
+
+def change_fill(canvas, rec1, rec2, rec3):
+    """Change fill character for rectangle(s)."""
+
+    print('\nChange fill characters')
+    rec1.change_fill_char('$')
+    rec2.change_fill_char('1')
+    rec3.change_fill_char('#')
+    canvas.render_canvas()
+
+def clear_canvas(canvas):
+    """Remove shapes from canvas."""
+
+    print('\nRemove all shapes from canvas.')
+    canvas.clear_canvas()
+
+
 # *************************
 
 if __name__ == '__main__':
 
     canvas = Canvas()
-    rec1 = Rectangle(1,1,3,3,'+')
-    rec2 = Rectangle(2,2,4,7, '*')
-    canvas.add_shape(rec1)
-    canvas.add_shape(rec2)
-    canvas.render_canvas()
+    rec1 = Rectangle(1,1,3,3,'@')
+    rec2 = Rectangle(1,6,7,8, '0')
+    rec3 = Rectangle(2,2,4,7, '*') 
+    plain_canvas(canvas)
+    add_shapes_to_canvas(canvas, rec1, rec2, rec3)
+    move_shape(canvas, rec3)
+    change_fill(canvas, rec1, rec2, rec3)
+    clear_canvas(canvas)
+
 

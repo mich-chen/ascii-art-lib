@@ -64,7 +64,7 @@ class Canvas():
             for row in range(len(canvas)):
                 current_row = list(canvas[row])
                 if row in shape.data.shape_len:
-                    for column in range(0, self.width):
+                    for column in range(len(current_row)):
                         if column in shape.data.shape_wid:
                             current_row[column] = shape.data.fill_char
                 # update rows in canvas with shape's fill char

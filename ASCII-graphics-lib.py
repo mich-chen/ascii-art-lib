@@ -38,10 +38,32 @@ class Canvas():
         self.height = 10
         self.shapes = Linkedlist()
 
+    @property
+    def shape_coordinates(self):
+        return self._shape_coordinates
+
     def render_canvas(self):
         """Print canvas and any shapes."""
 
-        print(self.shapes)
+        row = [0] * self.width
+        top_shape = self.shapes.tail.data
+
+        shape_len = set(list(range(top_shape.start_x, top_shape.end_x + 1)))
+        shape_wid = set(list(range(top_shape.start_y, top_shape.end_y + 1)))
+
+        for i in range(0, self.height):
+            current_row = list(row)
+            if i in shape_len:
+                for j in range(0, self.width):
+                    if j in shape_wid:
+                        current_row[j] = top_shape.fill_char
+            print(current_row)
+
+    def render_plain_canvas(self):
+        """Print plain canvas with no shapes."""
+        row = [0] * self.width
+        for i in range(0, self.height):
+            print(row)
 
     def add_shape(self, shape):
         """Add shape to a canvas, most recently added rectangles should appear on top."""
@@ -72,8 +94,7 @@ class Rectangle():
         self.end_x = end_x
         self.end_y = end_y
         self.fill_char = fill_char
-        self.area = (self.end_x - self.start_x) * (self.start_y - self.end_y)
-
+        # self.area = (self.end_x - self.start_x) * (self.start_y - self.end_y)
 
     def change_fill_char(self, new_char):
         """Change rectangle's fill character."""

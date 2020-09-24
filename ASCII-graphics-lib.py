@@ -63,9 +63,9 @@ class Canvas():
             # iterate through each row of canvas and change item with index of shape's dimensions to shape's fill char
             for row in range(len(canvas)):
                 current_row = list(canvas[row])
-                if row in shape.data.shape_len:
+                if row in shape.data.shape_length:
                     for column in range(len(current_row)):
-                        if column in shape.data.shape_wid:
+                        if column in shape.data.shape_width:
                             current_row[column] = shape.data.fill_char
                 # update rows in canvas with shape's fill char
                 canvas[row] = current_row
@@ -117,20 +117,20 @@ class Rectangle():
         return f'<Rectangle start: {self.start_x, self.start_y} end: {self.end_x, self.end_y}>'
 
     @property
-    def shape_wid(self):
+    def shape_width(self):
         """Return set of indices for shape's width."""
 
-        self._shape_wid = set(list(range(self.start_x, self.end_x + 1)))
+        self._shape_width = set(list(range(self.start_x, self.end_x + 1)))
 
-        return self._shape_wid
+        return self._shape_width
 
     @property
-    def shape_len(self):
+    def shape_length(self):
         """Return set of indices for shape's length."""
 
-        self._shape_len = set(list(range(self.start_y, self.end_y + 1)))
+        self._shape_length = set(list(range(self.start_y, self.end_y + 1)))
 
-        return self._shape_len
+        return self._shape_length
 
     def change_fill_char(self, new_char):
         """Change rectangle's fill character."""

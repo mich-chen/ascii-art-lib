@@ -50,40 +50,35 @@ class Canvas():
     def render_canvas(self):
         """Print canvas and any shapes."""
 
-        row = [' '] * self.width
-
         # create a 2d array, for number of rows we will print (which is the height)
+        row = [' '] * self.width
         canvas = [row for i in range(self.height)]
 
         def each_shape_canvas(shape):
+            """Recursive helper function to render shapes."""
+
             if shape is None:
                 return
 
+            # iterate through each row of canvas and change item with index of shape's dimensions to shape's fill char
             for row in range(len(canvas)):
                 current_row = list(canvas[row])
                 if row in shape.data.shape_len:
                     for column in range(0, self.width):
                         if column in shape.data.shape_wid:
                             current_row[column] = shape.data.fill_char
+                # update rows in canvas with shape's fill char
                 canvas[row] = current_row
 
+            # recursive call on next shape in ll
             each_shape_canvas(shape.next)
- 
-        current_shape = self.shapes.head
-        each_shape_canvas(current_shape)
 
+        # call helper function on first shape
+        each_shape_canvas(self.shapes.head)
+
+        # render completed canvas with all shapes overlapped
         for row in canvas:
             print(row)
-
-    # def is_full(self, row):
-    #     """Checks if row completely filled with rendered rectangles."""
-
-    #     row_set = set(row)
-    #     if len(row_set) == 1 and (0 in row_set):
-    #         return False
-        
-    #     return True
-
 
     def render_plain_canvas(self):
         """Print plain canvas with no shapes."""
@@ -129,6 +124,7 @@ class Rectangle():
 
     @property
     def shape_wid(self):
+        """Return set of indices for shape's width."""
 
         self._shape_wid = set(list(range(self.start_x, self.end_x + 1)))
 
@@ -136,6 +132,7 @@ class Rectangle():
 
     @property
     def shape_len(self):
+        """Return set of indices for shape's length."""
 
         self._shape_len = set(list(range(self.start_y, self.end_y + 1)))
 
